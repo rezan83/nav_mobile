@@ -1,0 +1,114 @@
+* {
+    margin: 0;
+    border: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  @import 'fonts';
+  @import 'colors';
+
+  @mixin flex-section($flow: row nowrap,$justify: space-between, $align: center ) {
+    display: flex;
+    flex-flow: $flow;
+    justify-content: $justify;
+    align-content: $align;
+  }
+
+nav{
+  @include flex-section();
+  background-color: $bg-color;
+  color: $main-color;
+  padding-left: 5vw;
+  font-family: $header-font;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 15vh;
+}
+
+.links{
+  @include flex-section($flow: row wrap,);
+  width: 60vw;
+  position: relative;
+  top: 4vh;
+  right: 4vw;
+}
+
+.drop-links{
+  @include flex-section($flow: column wrap);
+  position: fixed;
+  width: 50vw;
+  top: 13vh;
+  right: 0;
+  background-color: $bg-color;
+  visibility: collapse;
+  display: none;
+  a{
+    margin: 2vh 0;
+  }
+}
+a{
+  display: inline-block;
+  text-decoration: none;
+  color: $main-color;
+}
+#close {
+  visibility: hidden;
+  transition: all 2s;
+  position: absolute;
+  right: 6px;
+  top: -2px;
+}
+#hamborger{
+  position: absolute;
+  right: 0px;
+  top: 0px;
+}
+@media only screen and (min-width: 600px) {
+
+  #hamburger, .drop-links {
+    visibility: hidden;
+  }
+  #close {
+    visibility: hidden;
+  }
+  .links{
+    visibility: visible;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  #hamburger {
+    visibility: visible;
+  }
+  .links, .drop-links{
+    visibility: hidden;
+    display: none;
+  }
+  #close{
+    visibility: hidden;
+  }
+}
+
+// hiding the checkbox
+#btnControl {
+  display: none;
+}
+
+#btnControl:checked + label #hamburger {
+  visibility: hidden;
+}
+#btnControl:checked + label .drop-links {
+  visibility: visible;
+  display: flex;
+}
+
+#btnControl:checked + label #close {
+  visibility: visible;
+  transform: rotate(180deg);
+}
+#btnControl:checked + label .links{
+  visibility: hidden;
+  display: none;
+}
